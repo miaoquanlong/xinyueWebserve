@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Element from "element-ui";
+import 'element-ui/lib/theme-chalk/index.css';
 import Cookies from "js-cookie";
-import router from "./router";
+import router from "@/router/index";
 import store from "./store";
 import * as _ from "lodash";
 import "@/styles/index.scss"; // global css

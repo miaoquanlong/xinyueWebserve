@@ -1,37 +1,18 @@
 <template>
-  <div>
-
+  <div id="app">
+    <layout />
   </div>
 </template>
 
 <script>
+import layout from "@/views/layout/layout";
 
 export default {
-  name: '',
-  data () {
-    return {
-
-    };
-  },
-
-  components: {},
-
-  computed: {},
-
-  created () {
-    console.log(this.$store);
-    console.log(this);
-
-
-
-  },
-
-
-  methods: {},
-
-
+  name: 'app',
+  components: {
+    layout
+  }
 }
-
 </script>
-<style lang='' scoped>
+<style lang='scss' scoped>
 </style>
