@@ -3,11 +3,18 @@
     <el-container>
       <el-header>
         <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#4c4c4c" active-text-color="#1379b1">
-          <el-menu-item v-for="(item,index) in route" :key="index" :index="item.name" @click="$router.push(item.path)">{{item.name}}</el-menu-item>
+          <el-submenu v-for="(item,index) in route" :key="index" :index="item.name" @click="$router.push(item.path)">{{item.name}}</el-submenu>
+
+          <!-- <el-menu-item v-for="(item,index) in route" :key="index" :index="item.name" @click="$router.push(item.path)">
+            <el-submenu v-if="item.component&&item.component.children&&item.component.children.length > 0" v-for="(itemC,indexC) in item.component.children " :index="itemC+indexC">
+              <el-menu-item :key="indexC">{{itemC.name}}</el-menu-item>
+            </el-submenu>
+            <el-submenu v-else> {{item.name}}</el-submenu>
+          </el-menu-item> -->
         </el-menu>
       </el-header>
-      <el-main>Main</el-main>
-      <el-footer>Footer</el-footer>
+      <!-- <el-main>Main</el-main>
+      <el-footer>Footer</el-footer> -->
     </el-container>
   </div>
 </template>
