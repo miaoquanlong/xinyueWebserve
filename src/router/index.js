@@ -32,45 +32,52 @@ export const constantRouterMap = [
         name: '注册'
     },
     {
-        path: "/login",
+        path: "/user",
         component: user,
         name: '用户管理'
     },
     {
-        path: "/login",
+        path: "/role",
         component: role,
         name: '角色管理'
-    }, {
-        path: "/login",
+    }, 
+    {
+        path: "/commodity",
         component: commodity,
         name: '商品管理'
-    }, {
-        path: "/login",
+    },
+     {
+        path: "/order",
         component: order,
         name: '订单管理'
-    }, {
-        path: "/login",
+    }, 
+    {
+        path: "/advertisingspace",
         component: advertisingspace,
         name: '广告位管理'
-    }, {
-        path: "/login",
+    }, 
+    {
+        path: "/channel",
         component: channel,
         name: '渠道管理'
-    }, {
-        path: "/login",
+    }, 
+    {
+        path: "/datastatistics",
         component: datastatistics,
         name: '数据统计'
-    }, {
-        path: "/login",
+    },
+     {
+        path: "/log",
         component: log,
         name: '日志管理'
-    }, {
-        path: "/login",
+    }, 
+    {
+        path: "/message",
         component: message,
         name: '留言管理'
     },
     {
-        path: "/login",
+        path: "/expenditure",
         component: expenditure ,
         name: '收支明细'
     },
