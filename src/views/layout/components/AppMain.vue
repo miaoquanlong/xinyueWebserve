@@ -1,22 +1,20 @@
 <template>
-  <div>
-    <section class="app-main">
-      <transition name="fade-transform" mode="out-in">
-        <keep-alive>
-          <router-view :key="key" />
-        </keep-alive>
-      </transition>
-    </section>
-  </div>
+  <section class="app-main">
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+    </transition>
+  </section>
 </template>
 
 <script>
 export default {
   name: 'AppMain',
   computed: {
-    cachedViews () {
-      return this.$store.state.tagsView.cachedViews
-    },
+    // cachedViews() {
+    //   return this.$store.state.tagsView.cachedViews
+    // },
     key () {
       return this.$route.fullPath
     }
@@ -27,10 +25,10 @@ export default {
 <style scoped>
 .app-main {
   /*84 = navbar + tags-view = 50 +34 */
+  min-height: calc(100vh - 84px);
   width: 100%;
   position: relative;
-  max-height: calc(100vh - 98px);
-  overflow-y: auto;
+  overflow: hidden;
 }
 </style>
 

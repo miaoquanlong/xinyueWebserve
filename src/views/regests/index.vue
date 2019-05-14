@@ -1,6 +1,6 @@
 <template>
   <div>
-    注册
+    <el-button @click="test">测试按钮</el-button>
   </div>
 </template>
 
@@ -20,7 +20,12 @@ export default {
 
 
 
-  methods: {},
+  methods: {
+    test () {
+      console.log(this.$request);
+
+    }
+  },
 
 
 }

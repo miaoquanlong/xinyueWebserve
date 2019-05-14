@@ -55,8 +55,8 @@ export default {
     }
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '1111111'
       },
       loginRules: {
         // username: [{
@@ -85,38 +85,44 @@ export default {
       }
     },
     handleLogin () {
+      //   let para = {
+      //     username: this.loginForm.username,
+      //     password: this.loginForm.password
+      //   }
+      //   this.logins(para).then(res => {
+      //     Object.assign(para, res)
+      //     this.$store.dispatch('LoginByUsername', para).then((res) => {
+      //       console.log(2333);
+      //       this.$router.push({
+      //         path: '/'
+      //       })
+      //     }).catch(() => {
+      //       console.log(663);
+      //     })
+      //   }).catch((err) => {
+      //     this.$message.error(err);
+      //   })
+
+
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          let para = {
-            username: this.loginForm.username,
-            password: this.loginForm.password
-          }
-        //   logins(para).then(res => {
-            Object.assign(para, res)
-            this.$store.dispatch('LoginByUsername', para).then((res) => {
-              this.$router.push({
-                path: '/'
-              })
-            })
-        //     .catch(() => {
-
-        //     })
-        //   }).catch(() => {
-
-        //   })
-        //   function logins (param) {
-        //     return ApiExecute({
-        //       TAppID: 7, // 接口名称应用编号
-        //       Method: 'ErpLogin', // 接口名称
-        //       AppID: 20, // 应用号
-        //       Password: param.password,
-        //       Account: param.username, // 帐号
-        //     });
-        //   }
+          this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' })
+          }).catch(() => {
+          })
         } else {
           console.log('error submit!!')
           return false
         }
+      })
+
+
+
+    },
+    logins (param) {
+      return this.$request.post('/api/login', {
+        username: this.loginForm.username,
+        password: this.loginForm.password
       })
     }
   },

@@ -6,6 +6,8 @@ import Cookies from "js-cookie";
 import router from "@/router/index";
 import store from "./store";
 import * as _ from "lodash";
+import axios from './axios/index'
+
 // import "./icons"; // 图标
 import "./permission"; // 权限控制
 
@@ -21,6 +23,7 @@ Object.keys(filters).forEach(key => {
 });
 
 Vue.config.productionTip = false
+Vue.prototype.$request = axios
 
 new Vue({
     router,
