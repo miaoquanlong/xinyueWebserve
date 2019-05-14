@@ -1,16 +1,16 @@
 <template>
-  <div  >
-   <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"  >
-   <template v-for="(item,index) in router">
-    <el-menu-item  :index="item.name+index" v-if="!item.component.children">{{item.name}}</el-menu-item>
-    <el-submenu  :index ="item.name" v-else >
-    <template  v-for="(itemC,indexC) in item.component.children" >
-    <template slot="title">{{item.component.meta.title}}</template>
-     <el-menu-item :index="itemC.name">{{itemC.name}}</el-menu-item>
-    </template>
-    </el-submenu>
-   </template>
-</el-menu>
+  <div>
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <template v-for="(item,index) in router">
+        <el-menu-item :index="item.name+index" v-if="!item.component.children">{{item.name}}</el-menu-item>
+        <el-submenu :index="item.name" v-else>
+          <template slot="title">{{item.component.meta.title}}</template>
+          <template v-for="(itemC,indexC) in item.component.children">
+            <el-menu-item :index="itemC.name">{{itemC.name}}</el-menu-item>
+          </template>
+        </el-submenu>
+      </template>
+    </el-menu>
   </div>
 </template>
 
@@ -20,32 +20,32 @@
 
 export default {
   name: 'SidebarItem',
-//   props: {
-//     item: {
-//       type: Object,
-//       required: true
-//     },
-//     isNest: {
-//       type: Boolean,
-//       default: false
-//     },
-//     basePath: {
-//       type: String,
-//       default: ''
-//     }
-//   },
+  //   props: {
+  //     item: {
+  //       type: Object,
+  //       required: true
+  //     },
+  //     isNest: {
+  //       type: Boolean,
+  //       default: false
+  //     },
+  //     basePath: {
+  //       type: String,
+  //       default: ''
+  //     }
+  //   },
   data () {
     return {
       onlyOneChild: null,
-        activeIndex: '1',
-        router:[]
+      activeIndex: '1',
+      router: []
     }
   },
-  created() {
-      this.router =  this.$router.options.routes
-      console.log(
-     this.$router.options.routes
-      )
+  created () {
+    this.router = this.$router.options.routes
+    console.log(
+      this.$router.options.routes
+    )
   },
   methods: {
     // hasOneShowingChild (children) {
@@ -81,7 +81,7 @@ export default {
 
     //   }
     // },
-    handleSelect(){
+    handleSelect () {
 
     }
   }
