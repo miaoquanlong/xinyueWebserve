@@ -2,11 +2,11 @@
   <div>
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <template v-for="(item,index) in router">
-        <el-menu-item :index="item.name+index" v-if="!item.component.children">{{item.name}}</el-menu-item>
-        <el-submenu :index="item.name" v-else>
+        <el-menu-item :index="item.name+index" v-if="!item.component.children" @click="$router.push(item.path)">{{item.name}}</el-menu-item>
+        <el-submenu :index=" item.name" v-else>
           <template slot="title">{{item.component.meta.title}}</template>
           <template v-for="(itemC,indexC) in item.component.children">
-            <el-menu-item :index="itemC.name">{{itemC.name}}</el-menu-item>
+            <el-menu-item :index="itemC.name" @click="$router.push(itemC.path)">{{itemC.name}}</el-menu-item>
           </template>
         </el-submenu>
       </template>
@@ -81,7 +81,8 @@ export default {
 
     //   }
     // },
-    handleSelect () {
+    handleSelect (key, keyPath) {
+      console.log(key, keyPath);
 
     }
   }

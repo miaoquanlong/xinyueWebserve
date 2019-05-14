@@ -7,6 +7,7 @@ Vue.use(Router);
 import layout from "@/views/layout/layout";
 
 import login from '../views/login/index'
+import regest from '../views/regests/index'
 import user from "./modules/user.js"; // 用户管理
 import role from "./modules/role.js"; // 角色管理
 import commodity from "./modules/commodity.js"; // 商品管理
@@ -27,8 +28,8 @@ export const constantRouterMap = [
         name: '登陆'
     },
     {
-        path: "/login",
-        component: login,
+        path: "/regest",
+        component: regest,
         name: '注册'
     },
     {
@@ -40,37 +41,37 @@ export const constantRouterMap = [
         path: "/role",
         component: role,
         name: '角色管理'
-    }, 
+    },
     {
         path: "/commodity",
         component: commodity,
         name: '商品管理'
     },
-     {
+    {
         path: "/order",
         component: order,
         name: '订单管理'
-    }, 
+    },
     {
         path: "/advertisingspace",
         component: advertisingspace,
         name: '广告位管理'
-    }, 
+    },
     {
         path: "/channel",
         component: channel,
         name: '渠道管理'
-    }, 
+    },
     {
         path: "/datastatistics",
         component: datastatistics,
         name: '数据统计'
     },
-     {
+    {
         path: "/log",
         component: log,
         name: '日志管理'
-    }, 
+    },
     {
         path: "/message",
         component: message,
@@ -78,7 +79,7 @@ export const constantRouterMap = [
     },
     {
         path: "/expenditure",
-        component: expenditure ,
+        component: expenditure,
         name: '收支明细'
     },
 ]

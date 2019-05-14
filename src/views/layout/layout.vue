@@ -17,7 +17,7 @@
       </el-header>
      
     </el-container> -->
-     <div  @click="handleClickOutside"></div>
+    <div @click="handleClickOutside"></div>
     <sidebar class="sidebar-container" />
     <!-- <div class="main-container" style="padding:8px;">
       <navbar />
@@ -40,7 +40,7 @@ export default {
     };
   },
 
-  components: {sidebar},
+  components: { sidebar },
 
   computed: {},
 
@@ -48,14 +48,10 @@ export default {
     handleSelect (key, keyPath) {
       console.log(key, keyPath);
     },
-     handleClickOutside () {
-    //   this.$store.dispatch('closeSideBar', { withoutAnimation: false })
+    handleClickOutside () {
     }
   },
   created () {
-    this.route = this.$router.options.routes
-    console.log(this.$router.options.routes);
-
   }
 
 
