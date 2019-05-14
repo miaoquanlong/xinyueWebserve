@@ -67,12 +67,12 @@ export default {
   } */
 }
 .hideSidebar .logo-con {
-  width: 36px;
+  /* width: 36px;
   img {
     height: 25px;
     width: auto;
     display: block;
     margin: 0 auto;
-  }
+  } */
 }
 </style>

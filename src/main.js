@@ -6,6 +6,9 @@ import Cookies from "js-cookie";
 import router from "@/router/index";
 import store from "./store";
 import * as _ from "lodash";
+// import "./icons"; // 图标
+import "./permission"; // 权限控制
+
 import "@/styles/index.scss"; // global css
 import * as filters from "./filter"; // global filters
 

@@ -8,16 +8,29 @@ import layout from "@/views/layout/layout";
 
 import login from '../views/login/index'
 import regest from '../views/regests/index'
-import user from "./modules/user.js"; // 用户管理
-import role from "./modules/role.js"; // 角色管理
-import commodity from "./modules/commodity.js"; // 商品管理
-import order from "./modules/order.js"; // 订单管理
-import advertisingspace from "./modules/advertisingspace.js"; // 广告位管理
-import channel from "./modules/channel.js"; // 渠道管理
-import datastatistics from "./modules/datastatistics.js"; // 数据统计
-import log from "./modules/log.js"; // 日志管理
-import message from "./modules/message.js"; // 留言管理
-import expenditure from "./modules/expenditure.js"; // 收支明细
+import user from "@/views/user"; // 用户管理
+const operational = () => import("@/views/user/userlist/operational");
+const web = () => import("@/views/user/userlist/web");
+const applets = () => import("@/views/user/userlist/applets");
+
+import role from "./modules/role"; // 角色管理
+
+import commodity from "./modules/commodity"; // 商品管理
+
+import order from "./modules/order"; // 订单管理
+
+import advertisingspace from "./modules/advertisingspace"; // 广告位管理
+
+import channel from "./modules/channel"; // 渠道管理
+
+import datastatistics from "./modules/datastatistics"; // 数据统计
+
+import log from "./modules/log"; // 日志管理
+
+import message from "./modules/message"; // 留言管理
+
+import expenditure from "./modules/expenditure"; // 收支明细
+
 
 
 
@@ -35,7 +48,33 @@ export const constantRouterMap = [
     {
         path: "/user",
         component: user,
-        name: '用户管理'
+        name: '用户管理',
+        children: [
+            {
+                path: "/operational",
+                component: operational,
+                name: "运营后台",
+                meta: {
+                    title: "运营后台",
+                }
+            },
+            {
+                path: "/web",
+                component: web,
+                name: "web后端",
+                meta: {
+                    title: "web后端",
+                }
+            },
+            {
+                path: "/applets",
+                component: applets,
+                name: "小程序后端",
+                meta: {
+                    title: "小程序后端",
+                }
+            },
+        ]
     },
     {
         path: "/role",
