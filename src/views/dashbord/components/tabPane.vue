@@ -1,12 +1,7 @@
 <template>
   <el-table :data="list" border fit highlight-current-row style="width: 100%">
 
-    <el-table-column
-      v-loading="loading"
-      align="center"
-      label="ID"
-      width="65"
-      element-loading-text="请给我点时间！">
+    <el-table-column v-loading="loading" align="center" label="ID" width="65" element-loading-text="请给我点时间！">
       <template slot-scope="scope">
         <span>{{ scope.row.id }}</span>
       </template>
@@ -33,7 +28,7 @@
 
     <el-table-column width="120px" label="Importance">
       <template slot-scope="scope">
-        <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star"/>
+        <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" />
       </template>
     </el-table-column>
 
@@ -57,7 +52,7 @@
 
 export default {
   filters: {
-    statusFilter(status) {
+    statusFilter (status) {
       const statusMap = {
         published: 'success',
         draft: 'info',
@@ -72,7 +67,7 @@ export default {
       default: 'CN'
     }
   },
-  data() {
+  data () {
     return {
       list: null,
       listQuery: {
@@ -84,17 +79,17 @@ export default {
       loading: false
     }
   },
-  created() {
+  created () {
     this.getList()
   },
   methods: {
-    getList() {
+    getList () {
       this.loading = true
       this.$emit('create') // for test
-      fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.loading = false
-      })
+      //   fetchList(this.listQuery).then(response => {
+      this.list = []
+      this.loading = false
+      //   })
     }
   }
 }

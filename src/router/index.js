@@ -32,8 +32,6 @@ import message from "@/views/message"; // 留言管理
 
 import expenditure from "@/views/expenditure"; // 收支明细
 
-/* Router Modules */
-// import componentsRouter from '@/views/components'
 
 export const constantRouterMap = [
     {
