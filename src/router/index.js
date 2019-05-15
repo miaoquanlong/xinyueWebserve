@@ -60,7 +60,7 @@ export const asyncRouterMap = [
             name: 'dashbord',
             meta: {
                 title: 'dashbord',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -99,7 +99,7 @@ export const asyncRouterMap = [
         name: '用户管理',
         meta: {
             title: '用户管理',
-            icon: '404'
+            icon: 'el-icon-edit'
         },
         children: [
             {
@@ -108,6 +108,7 @@ export const asyncRouterMap = [
                 name: "operational",
                 meta: {
                     title: "运营后台",
+                    icon: 'el-icon-edit'
                 }
             },
             {
@@ -116,6 +117,7 @@ export const asyncRouterMap = [
                 name: "web",
                 meta: {
                     title: "web后端",
+                    icon: 'el-icon-edit'
                 }
             },
             {
@@ -124,6 +126,7 @@ export const asyncRouterMap = [
                 name: "applets",
                 meta: {
                     title: "小程序后端",
+                    icon: 'el-icon-edit'
                 }
             },
         ]
@@ -137,7 +140,7 @@ export const asyncRouterMap = [
             name: '角色管理',
             meta: {
                 title: '角色管理',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -150,7 +153,7 @@ export const asyncRouterMap = [
             name: '商品管理',
             meta: {
                 title: '商品管理',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -163,7 +166,7 @@ export const asyncRouterMap = [
             name: '订单管理',
             meta: {
                 title: '订单管理',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -176,7 +179,7 @@ export const asyncRouterMap = [
             name: '广告位管理',
             meta: {
                 title: '广告位管理',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -189,7 +192,7 @@ export const asyncRouterMap = [
             name: '渠道管理',
             meta: {
                 title: '渠道管理',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -203,7 +206,7 @@ export const asyncRouterMap = [
             name: '数据统计',
             meta: {
                 title: '数据统计',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -216,7 +219,7 @@ export const asyncRouterMap = [
             name: '日志管理',
             meta: {
                 title: '日志管理',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -229,7 +232,7 @@ export const asyncRouterMap = [
             name: '留言管理',
             meta: {
                 title: '留言管理',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -242,7 +245,7 @@ export const asyncRouterMap = [
             name: '收支明细',
             meta: {
                 title: '收支明细',
-                icon: 'tab'
+                icon: 'el-icon-edit'
             }
         }]
     },
@@ -254,7 +257,7 @@ export const asyncRouterMap = [
         name: 'ErrorPages',
         meta: {
             title: 'errorPages',
-            icon: '404'
+            icon: 'el-icon-edit'
         },
         children: [{
             path: '401',

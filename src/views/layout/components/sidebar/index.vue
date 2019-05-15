@@ -18,9 +18,9 @@ export default {
       'permission_routers',
       'sidebar'
     ]),
-    // isCollapse () {
-    //   return !this.sidebar.opened
-    // }
+    isCollapse () {
+      return !this.sidebar.opened
+    }
   }
 }
 </script>

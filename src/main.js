@@ -7,6 +7,7 @@ import router from "@/router/index";
 import store from "./store";
 import * as _ from "lodash";
 import axios from './axios/index'
+import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 // import "./icons"; // 图标
 import "./permission"; // 权限控制

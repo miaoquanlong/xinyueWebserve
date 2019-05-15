@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import LoginBg from '@/assets/images/bg.jpg'
+import LoginBg from '@/assets/images/bg.png'
 export default {
   components: {
   },
