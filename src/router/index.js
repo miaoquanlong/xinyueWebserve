@@ -3,9 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-/* layout */
 import layout from '@/views/layout/layout'
-// import login from '../views/login/index'
 // import regest from '../views/regests/index'
 import user from "@/views/user"; // 用户管理
 import dashbord from "@/views/dashbord"; // 首页
@@ -50,10 +48,10 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
-
     {
-        path: '/',
-        component: dashbord,
+        path: '',
+        component: layout,
+        redirect: 'index',
         children: [{
             path: 'index',
             component: () => import('@/views/dashbord/index'),
@@ -64,38 +62,9 @@ export const asyncRouterMap = [
             }
         }]
     },
-    // {
-    //     path: '/error',
-    //     component: layout,
-    //     redirect: 'noredirect',
-    //     name: 'ErrorPages',
-    //     meta: {
-    //         title: 'errorPages',
-    //         icon: '404'
-    //     },
-    //     children: [{
-    //         path: '401',
-    //         component: () => import('@/views/errorPage/401.vue'),
-    //         name: 'Page401',
-    //         meta: {
-    //             title: 'page401',
-    //             noCache: true
-    //         }
-    //     },
-    //     {
-    //         path: '404',
-    //         component: () => import('@/views/errorPage/404.vue'),
-    //         name: 'Page404',
-    //         meta: {
-    //             title: 'page404',
-    //             noCache: true
-    //         }
-    //     }
-    //     ]
-    // },
     {
         path: "/user",
-        component: user,
+        component: layout,
         name: '用户管理',
         meta: {
             title: '用户管理',
@@ -104,7 +73,7 @@ export const asyncRouterMap = [
         children: [
             {
                 path: "/operational",
-                component: operational,
+                component: layout,
                 name: "operational",
                 meta: {
                     title: "运营后台",
@@ -113,7 +82,7 @@ export const asyncRouterMap = [
             },
             {
                 path: "/web",
-                component: web,
+                component: layout,
                 name: "web",
                 meta: {
                     title: "web后端",
@@ -133,7 +102,7 @@ export const asyncRouterMap = [
     },
     {
         path: '/role',
-        component: role,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/role/index'),
@@ -146,7 +115,7 @@ export const asyncRouterMap = [
     },
     {
         path: '/commodity',
-        component: commodity,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/commodity/index'),
@@ -159,7 +128,7 @@ export const asyncRouterMap = [
     },
     {
         path: '/order',
-        component: order,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/order/index'),
@@ -172,7 +141,7 @@ export const asyncRouterMap = [
     },
     {
         path: '/advertisingspace',
-        component: advertisingspace,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/advertisingspace/index'),
@@ -185,7 +154,7 @@ export const asyncRouterMap = [
     },
     {
         path: '/channel',
-        component: channel,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/channel/index'),
@@ -199,7 +168,7 @@ export const asyncRouterMap = [
 
     {
         path: '/datastatistics',
-        component: datastatistics,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/datastatistics/index'),
@@ -212,7 +181,7 @@ export const asyncRouterMap = [
     },
     {
         path: '/log',
-        component: log,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/log/index'),
@@ -225,7 +194,7 @@ export const asyncRouterMap = [
     },
     {
         path: '/message',
-        component: message,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/message/index'),
@@ -238,7 +207,7 @@ export const asyncRouterMap = [
     },
     {
         path: '/expenditure',
-        component: expenditure,
+        component: layout,
         children: [{
             path: 'index',
             component: () => import('@/views/expenditure/index'),
