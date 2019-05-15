@@ -167,7 +167,7 @@ export const asyncRouterMap = [{
             name: '渠道管理',
             meta: {
                 title: '渠道管理',
-                icon: 'el-icon-guide'
+                icon: 'el-icon-umbrella'
             }
         }]
     },
