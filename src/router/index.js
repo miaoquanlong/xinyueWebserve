@@ -139,7 +139,7 @@ export const asyncRouterMap = [{
             name: '订单管理',
             meta: {
                 title: '订单管理',
-                icon: 'el-icon-set-up'
+                icon: 'el-icon-s-order'
             }
         }]
     },
