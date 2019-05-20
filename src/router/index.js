@@ -36,7 +36,7 @@ import expenditure from "@/views/expenditure"; // 收支明细
 export const constantRouterMap = [{
     path: '/login',
     component: () =>
-        import('@/views/login/index'),
+        import ('@/views/login/index'),
     hidden: true
 }, ]
 
