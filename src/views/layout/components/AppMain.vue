@@ -12,7 +12,7 @@
 export default {
   name: 'AppMain',
   computed: {
-    cachedViews() {
+    cachedViews () {
       return this.$store.state.tagsView.cachedViews
     },
     key () {
@@ -29,6 +29,7 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
+  padding: 20px;
 }
 </style>
 

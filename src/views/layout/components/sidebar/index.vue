@@ -21,6 +21,14 @@ export default {
     isCollapse () {
       return !this.sidebar.opened
     }
+  },
+  findList (province,cite,name){
+      if (province) {
+         this.data.forEach(item => {
+          _.find(data)
+              
+          });
+      }
   }
 }
 </script>
