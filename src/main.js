@@ -8,7 +8,6 @@ import store from "./store";
 import * as _ from "lodash";
 import axios from './axios/index'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
-
 // import "./icons"; // 图标
 import "./permission"; // 权限控制
 
@@ -22,7 +21,6 @@ Vue.use(Element, {
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
 });
-
 Vue.config.productionTip = false
 Vue.prototype.$request = axios
 

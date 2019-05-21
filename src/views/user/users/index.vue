@@ -2,9 +2,11 @@
   <div class="app-container">
     <div class="query main-filters">
       <div class="nav-btns">
-        <span>
-          <i class="el-icon-sugar" style="color:red;font-size:20px"></i> 用户列表
-        </span>
+        <span> <i class="el-icon-sugar" style="color:red;font-size:20px"></i> 用户列表 </span>
+      </div>
+      <div class="nav-btns">
+        <el-button plain v-waves type="primary" class="iconfont icon-add" @click="$router.push({name:'addusers'})" v-btn-power="9">新增</el-button>
+        <el-button plain v-waves type="primary" class="iconfont icon-delete" @click="deletehospital" v-btn-power="12">删除</el-button>
       </div>
       <el-form label-width="120px" class="filters">
         <el-row>
