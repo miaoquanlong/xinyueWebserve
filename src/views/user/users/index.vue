@@ -1,11 +1,11 @@
-<template>
+s<template>
     <div class="app-container">
         <div class="query main-filters">
             <div class="nav-btns">
                 <span> <i class="el-icon-sugar" style="color:red;font-size:20px"></i> 用户列表 </span>
             </div>
             <div class="nav-btns">
-                <el-button plain type="primary" class="iconfont icon-add" @click="$router.push({name:'addusers'})">新增</el-button>
+                <el-button plain type="primary" class="iconfont icon-add" @click="$router.push({name:'addusers',params:{key:'add'}})">新增</el-button>
                 <el-button plain type="primary" class="iconfont icon-delete">删除</el-button>
             </div>
             <el-form label-width="120px" class="filters">
@@ -17,7 +17,7 @@
                     </el-col>
                     <el-col :md="12" :lg="5">
                         <el-form-item label="渠道:">
-                            <el-select v-model="value" placeholder="请选择">
+                            <el-select v-model="searchUserobject.channel" placeholder="请选择">
                                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                                 </el-option>
                             </el-select>
@@ -47,22 +47,26 @@
             </el-form>
         </div>
         <!-- table -->
-        <el-table stripe border :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))" style="width: 100%">
-            <el-table-column label="Date" prop="date">
+        <el-table stripe border :data="tableData">
+            <el-table-column label="id" prop="id" align="center">
             </el-table-column>
-            <el-table-column label="Name" prop="name">
+            <el-table-column label="姓名" prop="username" align="center">
             </el-table-column>
-            <el-table-column align="right">
-                <template slot="header" slot-scope="scope">
-                    <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
-                </template>
+            <el-table-column label="昵称" prop="nikename" align="center">
+            </el-table-column>
+            <el-table-column label="电话" prop="phoneNum" align="center">
+            </el-table-column>
+            <el-table-column label="地址" prop="address" align="center">
+            </el-table-column>
+            <el-table-column label="渠道" prop="channel" align="center">
+            </el-table-column>
+            <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button size="mini" type="text" @click="$router.push({name:'addusers',params:{key:'edit',id:scope.row.id}})">编辑</el-button>
                     <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
-
     </div>
 </template>
 
@@ -74,46 +78,38 @@ export default {
     props: [''],
     data () {
         return {
-            tableData: [
+            tableData: [],
+            options: [
                 {
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
+                    value: '选项1',
+                    label: '黄金糕'
                 }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
+                    value: '选项2',
+                    label: '双皮奶'
                 }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
+                    value: '选项3',
+                    label: '蚵仔煎'
                 }, {
-                    date: '2016-05-03',
-                    name: '王小虎ss',
-                    address: '上海市普陀区金沙江路 1516 弄'
+                    value: '选项4',
+                    label: '龙须面'
+                }, {
+                    value: '选项5',
+                    label: '北京烤鸭'
                 }],
-            options: [{
-                value: '选项1',
-                label: '黄金糕'
-            }, {
-                value: '选项2',
-                label: '双皮奶'
-            }, {
-                value: '选项3',
-                label: '蚵仔煎'
-            }, {
-                value: '选项4',
-                label: '龙须面'
-            }, {
-                value: '选项5',
-                label: '北京烤鸭'
-            }],
 
             value: '',
             search: '',
             value2: '',
             StartTime: '',
             EndTime: '',
+            searchUserobject: {
+                id: '',
+                userName: '',
+                nikename: '',
+                phoneNum: '',
+                address: '',
+                channel: '',
+            },
         };
     },
 
@@ -131,11 +127,10 @@ export default {
             this.EndTime = end;
         },
         getusers () {
-            this.$request.get('/api/channel').then(res => {
-                console.log(res);
-
+            this.$request.get('/api/user/getuser' ).then(res => {
+                this.tableData = res
             })
-        }
+        },
     },
     created () {
         this.getusers()

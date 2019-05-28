@@ -110,7 +110,7 @@ export const asyncRouterMap = [{
         }
     },
     {
-        path: "/addusers",
+        path: "/addusers/:key/:id",
         component: addusers,
         name: "addusers",
         hidden: true,
