@@ -50,6 +50,8 @@ export default {
      * @param  {String} choice
      */
     decide (choice) {
+      console.log(35555);
+
       this.$refs.tinder.decide(choice)
     },
     /**
@@ -60,10 +62,16 @@ export default {
     submit (choice) {
       switch (choice) {
         case 'nope': // 左滑
+          console.log(122);
+
           break;
         case 'like': // 右滑
+          console.log(23232);
+
           break;
         case 'super': // 上滑
+          console.log('sdfsdfsd');
+
           break;
       }
       if (this.queue.length < 2) {
