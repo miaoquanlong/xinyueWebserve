@@ -49,7 +49,7 @@
         </el-row>
         <el-row>
           <el-button @click="adduser" type="primary" plain>{{submit}}</el-button>
-          <el-button @click="closepage" type="info" plain>关闭</el-button>
+          <el-button @click="routerBack()" type="info" plain>关闭</el-button>
         </el-row>
       </el-form>
       <!-- <el-button @click="closepage">关闭</el-button> -->
@@ -92,12 +92,16 @@ export default {
   },
 
   components: {},
-  created () {
-    console.log(this.$route.params.key);
+  activated () {
     if (this.$route.params.key == 'edit') {
       this.searchuser(this.$route.params.id)
+    } else {
+      this.addUserobject = {}
     }
 
+  },
+  created () {
+    console.log("更新了吗?")
   },
   computed: {
     submit () {
@@ -108,13 +112,6 @@ export default {
 
 
   methods: {
-    closepage () {
-      const view = {
-        path: "/addusers"
-      }
-      this.$store.dispatch('delView', view)
-      this.$router.back()
-    },
     adduser () {
       switch (this.$route.params.key) {
         case 'add':

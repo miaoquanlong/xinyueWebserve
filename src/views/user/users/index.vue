@@ -62,7 +62,7 @@ s<template>
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" @click="$router.push({name:'addusers',params:{key:'edit',id:scope.row.id}})">编辑</el-button>
+          <el-button size="mini" type="text" @click="$router.push({name:'editusers',params:{key:'edit',id:scope.row.id}})">编辑</el-button>
           <el-button size="mini" type="text" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
@@ -148,8 +148,15 @@ export default {
         })
     }
   },
-  created () {
+  //   created () {
+  //     console.log(933);
+
+  //     this.getusers()
+  //   },
+  activated () {
+    console.log("测试是啊啊啊");
     this.getusers()
+
   },
 
   watch: {}
