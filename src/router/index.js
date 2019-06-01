@@ -8,11 +8,16 @@ import layout from '@/views/layout/layout'
 import user from "@/views/user"; // 用户管理
 import dashbord from "@/views/dashbord"; // 首页
 
+import postmanagenment from "@/views/postManagement/postList"; // 帖子管理
+
 const operational = () => import("@/views/user/userlist/operational");
 const web = () => import("@/views/user/userlist/web");
 const applets = () => import("@/views/user/userlist/applets");
 const users = () => import("@/views/user/users/");
 const addusers = () => import("@/views/user/users/adduser");
+
+// const postList = () => import("@/views/postManagement/postList/index");
+
 
 
 
@@ -33,6 +38,9 @@ import log from "@/views/log"; // 日志管理
 import message from "@/views/message"; // 留言管理
 
 import expenditure from "@/views/expenditure"; // 收支明细
+
+// import postmanagenment from "@/views/postManagenment"; // 帖子管理
+
 
 
 export const constantRouterMap = [{
@@ -130,6 +138,20 @@ export const asyncRouterMap = [{
                 }
             }
         ]
+    },
+    {
+        path: '/postManagement',
+        component: layout,
+        children: [{
+            path: 'index',
+            component: () =>
+                import('@/views/postManagement/postList/index'),
+            name: '帖子管理',
+            meta: {
+                title: '帖子管理',
+                icon: 'el-icon-shopping-bag-1'
+            }
+        }]
     },
     {
         path: '/role',

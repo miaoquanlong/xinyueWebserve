@@ -154,9 +154,7 @@ export default {
   //     this.getusers()
   //   },
   activated () {
-    console.log("测试是啊啊啊");
     this.getusers()
-
   },
 
   watch: {}
