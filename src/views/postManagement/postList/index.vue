@@ -5,7 +5,7 @@ s<template>
         <span> <i class="el-icon-sugar" style="color:red;font-size:20px"></i> 帖子列表 </span>
       </div>
       <div class="nav-btns">
-        <el-button plain type="primary" class="iconfont icon-add" @click="$router.push({name:'addusers',params:{key:'add'}})">新增</el-button>
+        <el-button plain type="primary" class="iconfont icon-add">新增</el-button>
         <el-button plain type="primary" class="iconfont icon-delete">删除</el-button>
       </div>
       <el-form label-width="120px" class="filters">
