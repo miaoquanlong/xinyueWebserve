@@ -5,7 +5,7 @@ s<template>
                 <span> <i class="el-icon-sugar" style="color:red;font-size:20px"></i> 广告位管理 </span>
             </div>
             <div class="nav-btns">
-                <el-button plain type="primary" class="iconfont icon-add">新增</el-button>
+                <el-button plain type="primary" class="iconfont icon-add" @click="$router.push({name:'spacedetal',params:{key:'add',id:'1'}})">新增</el-button>
                 <el-button plain type="primary" class="iconfont icon-delete">删除</el-button>
             </div>
             <el-form label-width="120px" class="filters">
@@ -38,7 +38,7 @@ s<template>
         <el-table stripe border :data="tableData" class="table" @select="tableselect">
             <el-table-column type="selection" width="55">
             </el-table-column>
-            <el-table-column label="序号" prop="id" align="center">
+            <el-table-column label="序号" prop="positionsort" width="50">
             </el-table-column>
             <el-table-column label="图片" align="center">
                 <template slot-scope="scope">
@@ -47,8 +47,10 @@ s<template>
             </el-table-column>
             <el-table-column label="渠道名称" align="center">
                 <template slot-scope="scope">
-                    {{scope.row.channelName == 1 ?'纠结鸭':'塔罗占卜'}}
+                    {{scope.row.channelName == '1' ?'纠结鸭':'塔罗占卜'}}
                 </template>
+            </el-table-column>
+            <el-table-column label="广告名称" prop="spacename" align="center">
             </el-table-column>
             <el-table-column label="位置" align="center">
                 <template slot-scope="scope">
@@ -70,8 +72,8 @@ s<template>
             </el-table-column>
             <el-table-column label="排序" prop="selectIid" align="center">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="text" v-if="scope.row.status == 2" @click='putframe(scope.row.id,2)'>上移</el-button>
-                    <el-button size="mini" type="text" v-if="scope.row.status == 1" @click='putframe(scope.row.id,1)'>下移动</el-button>
+                    <el-button size="mini" type="text" @click='putframe(scope.row.id,2)'>上移</el-button>
+                    <el-button size="mini" type="text" @click='putframe(scope.row.id,1)'>下移</el-button>
                 </template>
             </el-table-column>
             <el-table-column label="创建时间" align="center">
@@ -81,8 +83,8 @@ s<template>
             </el-table-column>
             <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="text" v-if="scope.row.status == 2" @click='putframe(scope.row.id,2)'>启用</el-button>
-                    <el-button size="mini" type="text" v-if="scope.row.status == 1" @click='putframe(scope.row.id,1)'>编辑</el-button>
+                    <el-button size="mini" type="text" @click='putframe(scope.row.id,2)'>启用</el-button>
+                    <el-button size="mini" type="text" @click="$router.push({name:'spacedetal',params:{key:'edit',id:scope.row.id}})">编辑</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -102,10 +104,10 @@ export default {
             tableData: [],
             options: [
                 {
-                    value: 1,
+                    value: '1',
                     label: '启用'
                 }, {
-                    value: 2,
+                    value: '2',
                     label: '停用'
                 }],
             StartTime: '',
@@ -126,17 +128,17 @@ export default {
     filters: {
         position (status) {
             const statusMap = {
-                1: "首页",
-                2: "列表",
-                2: "资讯",
-                2: "个人中心",
+                '1': "首页",
+                '2': "列表",
+                '3': "资讯",
+                '4': "个人中心",
             };
             return statusMap[status];
         },
         linkType (status) {
             const statusMap = {
-                1: "内部链接",
-                2: "外部链接",
+                '1': "内部链接",
+                '2': "外部链接",
             };
             return statusMap[status];
         },
