@@ -31,6 +31,7 @@ import spacedetal from "@/views/advertisingspace/spacedetal"; // 广告位管理
 
 
 import channel from "@/views/channel"; // 渠道管理
+const chnneldetail = () => import("@/views/channel/chnneldetail");
 
 import datastatistics from "@/views/datastatistics"; // 数据统计
 
@@ -231,7 +232,12 @@ export const asyncRouterMap = [{
 {
     path: '/channel',
     component: layout,
-    children: [{
+    meta: {
+        title: '渠道管理',
+        icon: 'el-icon-wind-power'
+    },
+    children: [
+        {
         path: 'index',
         component: () =>
             import('@/views/channel/index'),
@@ -240,7 +246,19 @@ export const asyncRouterMap = [{
             title: '渠道管理',
             icon: 'el-icon-wind-power'
         }
-    }]
+    },
+    {
+        path: '/chnneldetail/:key/:id',
+        component: () =>
+            import('@/views/channel/chnneldetail'),
+        name: 'chnneldetail',
+        hidden:true,
+        meta: {
+            title: '渠道处理',
+            icon: 'el-icon-wind-power'
+        }
+    }
+]
 },
 
 {

@@ -34,7 +34,7 @@
                 <el-row>
                     <el-col :md="18" :lg="18">
                         <el-form-item label="链接：">
-                            <el-radio-group v-model="addUpdateSapceDetal.link">
+                            <el-radio-group v-model="addUpdateSapceDetal.linkType">
                                 <el-radio label="1">内部链接</el-radio>
                                 <el-radio label="2">外部链接</el-radio>
                             </el-radio-group>
@@ -77,10 +77,10 @@ export default {
                 image: '',
                 spacename: '',
                 channel: '',
-                link: '',
+                linkType: '',
                 position: '',
                 status: '',
-                id: ''
+                postId: ''
             },
             channelList: [
                 {
@@ -173,13 +173,15 @@ export default {
             let that = this
             this.$request.post('api/advertisingSpacea/gethspace', { id: userID }).then(res => {
                 // this.addUpdateSapceDetal = res[0]
+                console.log(res.result[0], "25");
                 that.addUpdateSapceDetal.image = res.result[0].image,
                     that.addUpdateSapceDetal.spacename = res.result[0].spacename,
-                    that.addUpdateSapceDetal.channel = res.result[0].channel,
-                    that.addUpdateSapceDetal.link = res.result[0].link,
+                    that.addUpdateSapceDetal.channel = res.result[0].channelName,
+                    that.addUpdateSapceDetal.linkType = res.result[0].linkType,
                     that.addUpdateSapceDetal.position = res.result[0].position,
                     that.addUpdateSapceDetal.status = res.result[0].status
-                // this.addUpdateSapceDetal.id = res[0].result.
+                that.addUpdateSapceDetal.postId = res.result[0].id
+
             })
         }
     },

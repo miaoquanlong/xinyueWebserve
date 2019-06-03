@@ -6,20 +6,19 @@ s<template>
             </div>
             <div class="nav-btns">
                 <el-button plain type="primary" class="iconfont icon-add" @click="$router.push({name:'spacedetal',params:{key:'add',id:'1'}})">新增</el-button>
-                <el-button plain type="primary" class="iconfont icon-delete">删除</el-button>
+                <el-button plain type="primary" class="iconfont icon-delete" @click="deletespace">删除</el-button>
             </div>
             <el-form label-width="120px" class="filters">
                 <el-row>
-                    <el-col :md="12" :lg="10">
+                    <el-col :md="12" :lg="7">
                         <el-form-item label="渠道名称:">
-                            <el-input v-model="searchSpace.keywords" clearable placeholder="支持内容和帖子id编号搜索">
-                                <template slot="append">
-                                    <i class="el-icon-search" style="cursor: pointer" @click="initsearch"></i>
-                                </template>
-                            </el-input>
+                            <el-select v-model="searchSpace.channelName" placeholder="请选择" clearable>
+                                <el-option label="纠结鸭" value="1"></el-option>
+                                <el-option label="塔罗占卜" value="2"></el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
-                    <el-col :md="12" :lg="12">
+                    <el-col :md="12" :lg="7">
                         <el-form-item label="状态:">
                             <el-select v-model="searchSpace.status" placeholder="请选择" clearable>
                                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -27,7 +26,15 @@ s<template>
                             </el-select>
                         </el-form-item>
                     </el-col>
-
+                    <el-col :md="12" :lg="8">
+                        <el-form-item label="关键字:">
+                            <el-input v-model="searchSpace.keywords" clearable placeholder="支持广告名称">
+                                <template slot="append">
+                                    <i class="el-icon-search" style="cursor: pointer" @click="initsearch"></i>
+                                </template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
                     <el-col :md="12" :lg="1">
                         <el-button @click="resolve">重置</el-button>
                     </el-col>
@@ -35,7 +42,7 @@ s<template>
             </el-form>
         </div>
         <!-- table -->
-        <el-table stripe border :data="tableData" class="table" @select="tableselect">
+        <el-table stripe border :data="tableData" class="table" @select="tableselect" @select-all="tableselect">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column label="序号" prop="positionsort" width="50">
@@ -67,7 +74,7 @@ s<template>
             </el-table-column>
             <el-table-column label="状态" align="center">
                 <template slot-scope="scope">
-                    {{scope.row.status=='1'?'已启用':'已停用'}}
+                    <el-tag :type="scope.row.status == '1'?'success':'warning'"> {{scope.row.status == '1'?'已启用':'已停用'}}</el-tag>
                 </template>
             </el-table-column>
             <el-table-column label="排序" prop="selectIid" align="center">
@@ -83,7 +90,8 @@ s<template>
             </el-table-column>
             <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="text" @click='putframe(scope.row.id,2)'>启用</el-button>
+                    <el-button size="mini" type="text" v-if="scope.row.status=='2'" @click="putstatus(scope.row.id,'1')">启用</el-button>
+                    <el-button size="mini" type="text" v-if="scope.row.status=='1'" @click="putstatus(scope.row.id,'2')">停用</el-button>
                     <el-button size="mini" type="text" @click="$router.push({name:'spacedetal',params:{key:'edit',id:scope.row.id}})">编辑</el-button>
                 </template>
             </el-table-column>
@@ -114,7 +122,9 @@ export default {
             EndTime: '',
             currentPage4: 1,
             total: 0,
+            selection: [],
             searchSpace: {
+                channelName: '',
                 status: '',
                 postid: '',
                 keywords: '',
@@ -159,12 +169,18 @@ export default {
             this.EndTime = end;
         },
         //加载数据
-        getusers () {
+        getusers (res) {
             this.$request.post('/api/advertisingSpacea/searchspace', this.searchSpace).then(res => {
-                console.log(res, "2626");
                 this.tableData = res.result
                 this.total = res.count
             })
+            if (res) {
+                this.$message({
+                    message: res,
+                    type: 'success'
+                })
+            }
+
         },
         //搜索
         initsearch () {
@@ -185,18 +201,32 @@ export default {
         // 上下架
         putframe (id, status) {
             this.$request.post('/api/userpost/putframe', { id: id, status: status }).then(res => {
-                this.getusers()
-                this.$message({
-                    message: res,
-                    type: 'success'
-                })
+                this.getusers(res)
             })
         },
         // 勾选
         tableselect (selection, row) {
             console.log(selection, row);
+            this.selection = selection
+
             // TODO
             // 删除待定
+        },
+        // 启用停用广告
+        putstatus (id, status) {
+            this.$request.post('/api/advertisingSpacea/puststatus', { id: id, status: status }).then(res => {
+                this.getusers(res)
+            })
+        },
+        // 删除
+        deletespace () {
+            let arr = []
+            this.selection.forEach(item => {
+                arr.push(`'${item.id}'`)
+            });
+            this.$request.post('/api/advertisingSpacea/deletespace', { id: arr.join() }).then(res => {
+                this.getusers(res)
+            })
         }
     },
 
