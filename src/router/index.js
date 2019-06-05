@@ -155,20 +155,20 @@ export const asyncRouterMap = [{
         }
     }]
 },
-{
-    path: '/role',
-    component: layout,
-    children: [{
-        path: 'index',
-        component: () =>
-            import('@/views/role/index'),
-        name: '角色管理',
-        meta: {
-            title: '角色管理',
-            icon: 'el-icon-female'
-        }
-    }]
-},
+// {
+//     path: '/role',
+//     component: layout,
+//     children: [{
+//         path: 'index',
+//         component: () =>
+//             import('@/views/role/index'),
+//         name: '角色管理',
+//         meta: {
+//             title: '角色管理',
+//             icon: 'el-icon-female'
+//         }
+//     }]
+// },
 {
     path: '/commodity',
     component: layout,

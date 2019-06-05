@@ -1,163 +1,226 @@
 s<template>
-  <div class="app-container">
-    <div class="query main-filters">
-      <div class="nav-btns">
-        <span> <i class="el-icon-sugar" style="color:red;font-size:20px"></i> 用户列表 </span>
-      </div>
-      <div class="nav-btns">
-        <el-button plain type="primary" class="iconfont icon-add" @click="$router.push({name:'addusers',params:{key:'add'}})">新增</el-button>
-        <el-button plain type="primary" class="iconfont icon-delete">删除</el-button>
-      </div>
-      <el-form label-width="120px" class="filters">
-        <el-row>
-          <el-col :md="12" :lg="6">
-            <el-form-item label="注册时间:">
-              <date-select @ObtainDate="dateselects"></date-select>
-            </el-form-item>
-          </el-col>
-          <el-col :md="12" :lg="5">
-            <el-form-item label="渠道:">
-              <el-select v-model="searchUserobject.channel" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :md="12" :lg="5">
-            <el-form-item label="客户状态:">
-              <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :md="12" :lg="6">
-            <el-form-item label="关键字:">
-              <el-input v-model="value" clearable>
-                <template slot="append">
-                  <i class="el-icon-search"></i>
+    <div class="app-container">
+        <div class="query main-filters">
+            <div class="nav-btns">
+                <span> <i class="el-icon-sugar" style="color:red;font-size:20px"></i> 用户列表 </span>
+            </div>
+            <div class="nav-btns">
+                <!-- <el-button plain type="primary" class="iconfont icon-add" @click="$router.push({name:'addusers',params:{key:'add'}})">新增</el-button> -->
+                <el-button plain type="primary" class="iconfont icon-delete" @click="deleteuser">删除</el-button>
+            </div>
+            <el-form label-width="120px" class="filters">
+                <el-row>
+                    <el-col :md="12" :lg="8">
+                        <el-form-item label="注册时间:">
+                            <date-select @ObtainDate="dateselects"></date-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :md="12" :lg="5">
+                        <el-form-item label="渠道:">
+                            <el-select v-model="searchUserobject.channel" placeholder="请选择" clearable>
+                                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :md="12" :lg="5">
+                        <el-form-item label="客户状态:">
+                            <el-select v-model="searchUserobject.customerStatus" placeholder="请选择" clearable>
+                                <el-option v-for="item in userstatusList" :key="item.value" :label="item.label" :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :md="12" :lg="6">
+                        <el-form-item label="关键字:">
+                            <el-input v-model="searchUserobject.keywords" clearable>
+                                <template slot="append">
+                                    <i class="el-icon-search" style="cursor: pointer;" @click="getusers"></i>
+                                </template>
+                                <template slot="append">
+                                    <i class="el-icon-refresh" style="cursor: pointer;margin-left: 15px" @click="reload"></i>
+                                </template>
+                            </el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+        <!-- table -->
+        <el-table stripe border :data="tableData" @select="tableSelect" @select-all="tableSelect">
+            <el-table-column type="selection" width="50">
+            </el-table-column>
+            <el-table-column label="序号" type="index" align="center" width="50">
+            </el-table-column>
+            <el-table-column label="用户编号" prop="userid" align="center">
+            </el-table-column>
+            <el-table-column label="账号" prop="account" align="center">
+            </el-table-column>
+            <el-table-column label="注册手机号" prop="regestPhone" align="center">
+            </el-table-column>
+            <el-table-column label="姓名" prop="customerName" align="center">
+            </el-table-column>
+            <el-table-column label="客户状态" align="center">
+                <template slot-scope="scope">
+                    {{scope.row.customerStatus == '1'?'已绑定':'未绑定'}}
                 </template>
-              </el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :md="12" :lg="1">
-            <el-button>重置</el-button>
-          </el-col>
-        </el-row>
-      </el-form>
+            </el-table-column>
+            <el-table-column label="渠道" align="center">
+                <template slot-scope="scope">
+                    {{scope.row.channel|channel}}
+                </template>
+            </el-table-column>
+            <el-table-column label="注册时间" align="center">
+                <template slot-scope="scope">
+                    {{scope.row.regestTime|momentTime('YYYY-MM-DD HH:mm:ss')}}
+                </template>
+            </el-table-column>
+            <el-table-column label="用户地址" prop="address" align="center">
+            </el-table-column>
+            <el-table-column label="操作" align="center">
+                <template slot-scope="scope">
+                    <el-button size="mini" type="text" disabled>忘记密码</el-button>
+                    <!-- <el-button size="mini" type="text">删除</el-button> -->
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[10, 20, 30, 40]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="total">
+        </el-pagination>
     </div>
-    <!-- table -->
-    <el-table stripe border :data="tableData">
-      <el-table-column label="id" prop="id" align="center">
-      </el-table-column>
-      <el-table-column label="姓名" prop="username" align="center">
-      </el-table-column>
-      <el-table-column label="昵称" prop="nikename" align="center">
-      </el-table-column>
-      <el-table-column label="电话" prop="phoneNum" align="center">
-      </el-table-column>
-      <el-table-column label="地址" prop="address" align="center">
-      </el-table-column>
-      <el-table-column label="渠道" prop="channel" align="center">
-      </el-table-column>
-      <el-table-column label="操作" align="center">
-        <template slot-scope="scope">
-          <el-button size="mini" type="text" @click="$router.push({name:'editusers',params:{key:'edit',id:scope.row.id}})">编辑</el-button>
-          <el-button size="mini" type="text" @click="handleDelete(scope.row)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
 </template>
 
 <script>
 import dateSelect from "@/components/DateSelection/index";
 
 export default {
-  name: '',
-  props: [''],
-  data () {
-    return {
-      tableData: [],
-      options: [
-        {
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+    name: '',
+    props: [''],
+    data () {
+        return {
+            tableData: [],
+            options: [
+                {
+                    value: '1',
+                    label: '运营后台'
+                }, {
+                    value: '2',
+                    label: 'web端'
+                },
+                {
+                    value: '3',
+                    label: '小程序'
+                },
+                {
+                    value: '4',
+                    label: '其他'
+                }],
+            userstatusList: [
+                {
+                    value: '1',
+                    label: '已绑定'
+                },
+                {
+                    value: '2',
+                    label: '未绑定'
+                },
+            ],
 
-      value: '',
-      search: '',
-      value2: '',
-      StartTime: '',
-      EndTime: '',
-      searchUserobject: {
-        id: '',
-        userName: '',
-        nikename: '',
-        phoneNum: '',
-        address: '',
-        channel: '',
-      },
-    };
-  },
-
-  components: { dateSelect },
-
-  computed: {},
-
-  beforeMount () { },
-
-  mounted () { },
-
-  methods: {
-    dateselects (start, end) {
-      this.StartTime = start;
-      this.EndTime = end;
+            value: '',
+            search: '',
+            value2: '',
+            StartTime: '',
+            EndTime: '',
+            currentPage4: 1,
+            total: 0,
+            selection: [],
+            searchUserobject: {
+                id: '',
+                customerStatus: '',
+                keywords: '',
+                channel: '',
+            },
+        };
     },
-    getusers () {
-      this.$request.get('/api/user/getuser').then(res => {
-        this.tableData = res
-      })
+
+    components: { dateSelect },
+
+    computed: {},
+
+    beforeMount () { },
+
+    mounted () { },
+    filters: {
+        channel (status) {
+            const statusMap = {
+                '1': "运营后台",
+                '2': "web端",
+                '3': "小程序",
+                '4': "其他",
+            };
+            return statusMap[status];
+        },
     },
-    // 删除用户
-    handleDelete (row) {
-      this.$request.post('/api/user/deleteusers', { id: row.id }).then(res => {
-        this.$message({
-          message: res,
-          type: 'success'
-        })
+    methods: {
+        dateselects (start, end) {
+            this.StartTime = start;
+            this.EndTime = end;
+        },
+        getusers () {
+            this.$request.post('/api/user/searchuser', this.searchUserobject).then(res => {
+                this.tableData = res.result
+                this.total = res.count
+            })
+        },
+        // 删除用户
+        handleDelete (row) {
+            this.$request.post('/api/user/deleteusers', { id: row.id }).then(res => {
+                this.$message({
+                    message: res,
+                    type: 'success'
+                })
+                this.getusers()
+            })
+                .catch(err => {
+                    this.$message({
+                        message: err,
+                        type: 'error'
+                    })
+                })
+        },
+        // 多选
+        tableSelect (selection, row) {
+            console.log(selection);
+
+            this.selection = selection
+        },
+        handleSizeChange () {
+
+        },
+        handleCurrentChange () {
+
+        },
+        //重置
+        reload () {
+            this.searchUserobject = {}
+            this.getusers()
+        },
+        // 多选删除
+        deleteuser () {
+            let arr = []
+            this.selection.forEach(item => {
+                arr.push(`'${item.id}'`)
+            });
+            this.$request.post('/api/user/deleteuser', { id: arr.join() }).then(res => {
+                this.getusers(res)
+            })
+        }
+    },
+
+    created () {
         this.getusers()
-      })
-        .catch(err => {
-          this.$message({
-            message: err,
-            type: 'error'
-          })
-        })
-    }
-  },
-  //   created () {
-  //     console.log(933);
+    },
 
-  //     this.getusers()
-  //   },
-  activated () {
-    this.getusers()
-  },
-
-  watch: {}
+    watch: {}
 
 }
 

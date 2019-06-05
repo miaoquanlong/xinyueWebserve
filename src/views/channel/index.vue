@@ -10,27 +10,6 @@ s<template>
             </div>
             <el-form label-width="120px" class="filters">
                 <el-row>
-                    <!-- <el-col :md="12" :lg="6">
-                        <el-form-item label="注册时间:">
-                            <date-select @ObtainDate="dateselects"></date-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :md="12" :lg="5">
-                        <el-form-item label="渠道:">
-                            <el-select v-model="searchUserobject.channel" placeholder="请选择">
-                                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :md="12" :lg="5">
-                        <el-form-item label="客户状态:">
-                            <el-select v-model="value" placeholder="请选择">
-                                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-col> -->
                     <el-col :md="12" :lg="12">
                         <el-form-item label="应用名称:">
                             <el-input v-model="searchUserobject.keywords" clearable>
@@ -75,8 +54,6 @@ export default {
     data () {
         return {
             tableData: [],
-
-
             value: '',
             search: '',
             value2: '',
@@ -134,12 +111,7 @@ export default {
                 })
         }
     },
-    //   created () {
-    //     console.log(933);
-
-    //     this.getusers()
-    //   },
-    activated () {
+    created () {
         this.getusers()
     },
 

@@ -37,15 +37,12 @@ export default {
     },
 
     components: {},
-    activated () {
+    created () {
         if (this.$route.params.key == 'edit') {
             this.searchuser(this.$route.params.id)
         } else {
             this.addUpdateSapceDetal = {}
         }
-
-    },
-    created () {
     },
     computed: {
         submit () {

@@ -6,7 +6,7 @@ s<template>
             </div>
             <div class="nav-btns">
                 <el-button plain type="primary" class="iconfont icon-add">新增</el-button>
-                <el-button plain type="primary" class="iconfont icon-delete">删除</el-button>
+                <el-button plain type="primary" class="iconfont icon-delete" @click="deletePost">删除</el-button>
             </div>
             <el-form label-width="120px" class="filters">
                 <el-row>
@@ -105,6 +105,7 @@ export default {
             EndTime: '',
             currentPage4: 1,
             total: 0,
+            selection: [],
             searchUserobject: {
                 status: '',
                 postid: '',
@@ -176,13 +177,24 @@ export default {
         // 勾选
         tableselect (selection, row) {
             console.log(selection, row);
+            this.selection = selection
             // TODO
             // 删除待定
+        },
+        // 删除
+        deletePost () {
+            let arr = []
+            this.selection.forEach(item => {
+                arr.push(`'${item.id}'`)
+            });
+            this.$request.post('/api/userpost/deletepost', { id: arr.join() }).then(res => {
+                this.getusers(res)
+            })
         }
     },
 
 
-    activated () {
+    created () {
         this.getusers()
     },
 

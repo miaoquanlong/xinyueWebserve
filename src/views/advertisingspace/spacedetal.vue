@@ -8,8 +8,12 @@
                 <el-row>
                     <el-col :md="18" :lg="18">
                         <el-form-item label="图片：">
-                            <el-input v-model="addUpdateSapceDetal.image" clearable>
-                            </el-input>
+                            <el-upload action="http://localhost:3001/api/multer/upload" :file-list="fileList" list-type="picture-card" :on-success="handleAvatarSuccess" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                                <i class="el-icon-plus"></i>
+                            </el-upload>
+                            <el-dialog :visible.sync="dialogVisible">
+                                <img width="100%" :src="dialogImageUrl" alt="">
+                            </el-dialog>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -68,7 +72,6 @@
 </template>
 
 <script>
-
 export default {
     name: '',
     data () {
@@ -82,6 +85,12 @@ export default {
                 status: '',
                 postId: ''
             },
+            dialogImageUrl: '',
+            dialogVisible: false,
+            photoDate: {
+                name: 'photoUpload'
+            },
+            fileList: [],
             channelList: [
                 {
                     value: '1',
@@ -111,21 +120,25 @@ export default {
     },
 
     components: {},
-    activated () {
+    created () {
         if (this.$route.params.key == 'edit') {
             this.searchuser(this.$route.params.id)
         } else {
             this.addUpdateSapceDetal = {}
         }
-
-    },
-    created () {
     },
     computed: {
         submit () {
             return this.$route.params.key == 'add' ? '新增' : '修改'
+        },
+        uploadHeaders () {
+            return {
+                Authorization: this.$store.state.id_token
+            }
         }
 
+    },
+    mounted () {
     },
 
 
@@ -168,6 +181,10 @@ export default {
                     break;
             }
         },
+        handleRemove (file, fileList) {
+            fileList.splice(file, 1);
+            this.addUpdateSapceDetal.image = ""
+        },
         // 获取数据
         searchuser (userID) {
             let that = this
@@ -181,12 +198,23 @@ export default {
                     that.addUpdateSapceDetal.position = res.result[0].position,
                     that.addUpdateSapceDetal.status = res.result[0].status
                 that.addUpdateSapceDetal.postId = res.result[0].id
+                that.addUpdateSapceDetal.image = res.result[0].image
+                that.fileList.push({ name: res.result[0].image, url: 'http://193.112.58.152:3303/routes' + res.result[0].image })
 
             })
-        }
+        },
+        // 图片上传成功回调
+        handleAvatarSuccess (res, file) {
+            console.log(res, file);
+            this.addUpdateSapceDetal.image = res.data.url
+        },
+
+        handlePictureCardPreview (file) {
+            this.dialogImageUrl = file.url;
+            this.dialogVisible = true;
+        },
+
     },
-
-
 }
 
 </script>

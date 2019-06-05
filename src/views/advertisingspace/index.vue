@@ -28,7 +28,7 @@ s<template>
                     </el-col>
                     <el-col :md="12" :lg="8">
                         <el-form-item label="关键字:">
-                            <el-input v-model="searchSpace.keywords" clearable placeholder="支持广告名称">
+                            <el-input v-model.trim="searchSpace.keywords" clearable placeholder="支持广告名称">
                                 <template slot="append">
                                     <i class="el-icon-search" style="cursor: pointer" @click="initsearch"></i>
                                 </template>
@@ -49,7 +49,7 @@ s<template>
             </el-table-column>
             <el-table-column label="图片" align="center">
                 <template slot-scope="scope">
-                    <img :src="scope.row.image" />
+                    <img :src="'http://193.112.58.152:3303/routes'+scope.row.image" />
                 </template>
             </el-table-column>
             <el-table-column label="渠道名称" align="center">
@@ -230,11 +230,9 @@ export default {
         }
     },
 
-
-    activated () {
+    created () {
         this.getusers()
     },
-
     watch: {}
 
 }
