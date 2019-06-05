@@ -33,13 +33,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
  理想国. 心悦科技 前端项目
 ======================
 1. 采用以下插件 
-   - [] * vue主框架  
-   - [] * vue-router路由 
-   - [] * axios前后端数据交互
-   - [] * vuex状态管理
-   - [] * lodash函数库
-   - [] * element-ui组件库
-   - [x] * react
+   - [x] * vue主框架  
+   - [x] * vue-router路由 
+   - [x] * axios前后端数据交互
+   - [x] * vuex状态管理
+   - [x] * lodash函数库
+   - [x] * element-ui组件库
 
 ---------------------
 - 安装教程
