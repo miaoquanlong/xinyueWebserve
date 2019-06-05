@@ -79,8 +79,8 @@ s<template>
             </el-table-column>
             <el-table-column label="排序" prop="selectIid" align="center">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="text" @click='putframe(scope.row.id,2)'>上移</el-button>
-                    <el-button size="mini" type="text" @click='putframe(scope.row.id,1)'>下移</el-button>
+                    <el-button size="mini" type="text"  @click='putframe(scope.row.id,2)'>上移</el-button>
+                    <el-button size="mini" type="text"  @click='putframe(scope.row.id,1)'>下移</el-button>
                 </template>
             </el-table-column>
             <el-table-column label="创建时间" align="center">
@@ -103,6 +103,7 @@ s<template>
 
 <script>
 import dateSelect from "@/components/DateSelection/index";
+import { type } from 'os';
 
 export default {
     name: '',
@@ -200,9 +201,13 @@ export default {
         },
         // 上下架
         putframe (id, status) {
-            this.$request.post('/api/userpost/putframe', { id: id, status: status }).then(res => {
-                this.getusers(res)
+            this.$message({
+                message: '暂不可用',
+                type: 'warning'
             })
+            // this.$request.post('/api/userpost/putframe', { id: id, status: status }).then(res => {
+            //     this.getusers(res)
+            // })
         },
         // 勾选
         tableselect (selection, row) {
