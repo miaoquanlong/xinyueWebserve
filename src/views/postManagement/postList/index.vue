@@ -5,7 +5,7 @@ s<template>
                 <span> <i class="el-icon-sugar" style="color:red;font-size:20px"></i> 帖子列表 </span>
             </div>
             <div class="nav-btns">
-                <el-button plain type="primary" class="iconfont icon-add">新增</el-button>
+                <!-- <el-button plain type="primary" class="iconfont icon-add">新增</el-button> -->
                 <el-button plain type="primary" class="iconfont icon-delete" @click="deletePost">删除</el-button>
             </div>
             <el-form label-width="120px" class="filters">
@@ -58,7 +58,7 @@ s<template>
             </el-table-column>
             <el-table-column label="状态" align="center">
                 <template slot-scope="scope">
-                    {{scope.row.status|status}}
+                    <el-tag :type="scope.row.status == 1?'success':'warning'"> {{scope.row.status|status}}</el-tag>
                 </template>
             </el-table-column>
             <el-table-column label="选项ID" prop="selectIid" align="center">
@@ -184,13 +184,29 @@ export default {
         },
         // 删除
         deletePost () {
-            let arr = []
-            this.selection.forEach(item => {
-                arr.push(`'${item.id}'`)
-            });
-            this.$request.post('/api/userpost/deletepost', { id: arr.join() }).then(res => {
-                this.getusers(res)
-            })
+            if (this.selection.length > 0) {
+                let arr = []
+                this.selection.forEach(item => {
+                    arr.push(`'${item.id}'`)
+                });
+                this.$confirm('此操作将永久删除数据, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$request.post('/api/userpost/deletepost', { id: arr.join() }).then(res => {
+                        this.getusers(res)
+                    })
+                        .catch(res => {
+                            this.getusers(res)
+                        })
+                })
+            } else {
+                this.$message({
+                    message: '尚未选择需要删除的额数据',
+                    type: 'warning'
+                })
+            }
         }
     },
 

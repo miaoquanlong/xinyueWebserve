@@ -34,7 +34,10 @@ s<template>
             </el-table-column>
             <el-table-column label="渠道编号" prop="chnnelNumbering" align="center">
             </el-table-column>
-            <el-table-column label="渠道名称" prop="chnnelName" align="center">
+            <el-table-column label="渠道名称" prop="" align="center">
+                <template slot-scope="scope">
+                    <el-tag type="success"> {{scope.row.chnnelName}}</el-tag>
+                </template>
             </el-table-column>
             <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
@@ -48,7 +51,6 @@ s<template>
 
 <script>
 import dateSelect from "@/components/DateSelection/index";
-
 export default {
     name: '',
     props: [''],
@@ -97,19 +99,26 @@ export default {
         },
         // 删除用户
         deletechnnel (id) {
-            this.$request.post('/api/chnnel/deletechnnel', { id: id }).then(res => {
-                this.$message({
-                    message: res,
-                    type: 'success'
-                })
-                this.getusers()
-            })
-                .catch(err => {
+            this.$confirm('此操作将永久删除数据, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                this.$request.post('/api/chnnel/deletechnnel', { id: id }).then(res => {
                     this.$message({
-                        message: err,
-                        type: 'error'
+                        message: res,
+                        type: 'success'
                     })
+                    this.getusers()
                 })
+                    .catch(err => {
+                        this.$message({
+                            message: err,
+                            type: 'error'
+                        })
+                    })
+            })
+
         }
     },
     created () {

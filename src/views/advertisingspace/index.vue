@@ -226,13 +226,37 @@ export default {
         },
         // 删除
         deletespace () {
-            let arr = []
-            this.selection.forEach(item => {
-                arr.push(`'${item.id}'`)
-            });
-            this.$request.post('/api/advertisingSpacea/deletespace', { id: arr.join() }).then(res => {
-                this.getusers(res)
-            })
+            if (this.selection.length > 0) {
+                let arr = []
+                this.selection.forEach(item => {
+                    arr.push(`'${item.id}'`)
+                });
+                this.$confirm('此操作将永久删除数据, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$request.post('/api/advertisingSpacea/deletespace', { id: arr.join() }).then(res => {
+                        this.getusers()
+                        this.$message({
+                            message: res,
+                            type: 'success'
+                        })
+                    })
+                        .catch(err => {
+                            this.$message({
+                                message: err,
+                                type: 'warning'
+                            })
+                        })
+                })
+            } else {
+                this.$message({
+                    message: '尚未选择需要删除的额数据',
+                    type: 'warning'
+                })
+            }
+
         }
     },
 
