@@ -29,14 +29,15 @@ s<template>
                     <el-col :md="12" :lg="8">
                         <el-form-item label="关键字:">
                             <el-input v-model.trim="searchSpace.keywords" clearable placeholder="支持广告名称">
-                                <template slot="append">
-                                    <i class="el-icon-search" style="cursor: pointer" @click="initsearch"></i>
-                                </template>
                             </el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :md="12" :lg="1">
-                        <el-button @click="resolve">重置</el-button>
+
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <el-button @click="initsearch" type="primary" plain> <i class="el-icon-search" style="cursor: pointer;"></i>搜索</el-button>
+                        <el-button @click="resolve" type="primary" plain> <i class="el-icon-refresh" style="cursor: pointer;"></i>重置</el-button>
                     </el-col>
                 </el-row>
             </el-form>
@@ -79,8 +80,8 @@ s<template>
             </el-table-column>
             <el-table-column label="排序" prop="selectIid" align="center">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="text"  @click='putframe(scope.row.id,2)'>上移</el-button>
-                    <el-button size="mini" type="text"  @click='putframe(scope.row.id,1)'>下移</el-button>
+                    <el-button size="mini" type="text" @click='putframe(scope.row.id,2)'>上移</el-button>
+                    <el-button size="mini" type="text" @click='putframe(scope.row.id,1)'>下移</el-button>
                 </template>
             </el-table-column>
             <el-table-column label="创建时间" align="center">

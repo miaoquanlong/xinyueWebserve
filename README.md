@@ -49,7 +49,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ---------------------
 
- 理想国. 心悦科技 服务端项目请移架这里 [理想国. 心悦科技](https://github.com/miaoquanlong/xinyueNode-serve" )
+ 理想国. 心悦科技 服务端项目请移架这里 [理想国. 心悦科技](https://github.com/miaoquanlong/xinyueNode-serve )
 ======================
 
 

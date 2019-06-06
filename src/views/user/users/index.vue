@@ -34,16 +34,17 @@ s<template>
                     <el-col :md="12" :lg="6">
                         <el-form-item label="关键字:">
                             <el-input v-model="searchUserobject.keywords" clearable>
-                                <template slot="append">
-                                    <i class="el-icon-search" style="cursor: pointer;" @click="getusers"></i>
-                                </template>
-                                <template slot="append">
-                                    <i class="el-icon-refresh" style="cursor: pointer;margin-left: 15px" @click="reload"></i>
-                                </template>
                             </el-input>
                         </el-form-item>
                     </el-col>
                 </el-row>
+                <el-row>
+                    <el-col>
+                        <el-button @click="getusers" type="primary" plain> <i class="el-icon-search" style="cursor: pointer;"></i>搜索</el-button>
+                        <el-button @click="reload" type="primary" plain> <i class="el-icon-refresh" style="cursor: pointer;"></i>重置</el-button>
+                    </el-col>
+                </el-row>
+
             </el-form>
         </div>
         <!-- table -->

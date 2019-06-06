@@ -13,14 +13,15 @@ s<template>
                     <el-col :md="12" :lg="12">
                         <el-form-item label="应用名称:">
                             <el-input v-model="searchUserobject.keywords" clearable>
-                                <template slot="append">
-                                    <i class="el-icon-search" style="cursor: pointer;" @click="getusers"></i>
-                                </template>
                             </el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :md="12" :lg="1">
-                        <el-button @click="restart">重置</el-button>
+
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <el-button @click="getusers" type="primary" plain> <i class="el-icon-search" style="cursor: pointer;"></i>搜索</el-button>
+                        <el-button @click="restart" type="primary" plain> <i class="el-icon-refresh" style="cursor: pointer;"></i>重置</el-button>
                     </el-col>
                 </el-row>
             </el-form>

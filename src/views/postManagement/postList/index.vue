@@ -28,14 +28,15 @@ s<template>
                     <el-col :md="12" :lg="6">
                         <el-form-item label="关键字:">
                             <el-input v-model="searchUserobject.keywords" clearable placeholder="支持内容和帖子id编号搜索">
-                                <template slot="append">
-                                    <i class="el-icon-search" style="cursor: pointer" @click="initsearch"></i>
-                                </template>
                             </el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :md="12" :lg="1">
-                        <el-button @click="resolve">重置</el-button>
+
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <el-button @click="initsearch" type="primary" plain> <i class="el-icon-search" style="cursor: pointer;"></i>搜索</el-button>
+                        <el-button @click="resolve" type="primary" plain> <i class="el-icon-refresh" style="cursor: pointer;"></i>重置</el-button>
                     </el-col>
                 </el-row>
             </el-form>

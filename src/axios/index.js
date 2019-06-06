@@ -12,10 +12,10 @@ function endLoading () {
     loading.close()
 }
 const request = axios.create({
-    baseURL: '/api',
+    baseURL: '/',
     timeout: 15000
 })
-
+axios.defaults.baseURL = 'http://193.112.58.152:3303'
 
 let needLoadingRequestCount = 0
 
@@ -37,6 +37,8 @@ function tryHideFullScreenLoading () {
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
+    config.url = config.url.replace(/^\/api/ig, '')
+    // config.baseURL = 'http://193.112.58.152:3303'
     showFullScreenLoading()
     // 在发送请求之前做些什么
     return config;
